@@ -16,24 +16,8 @@ Player.prototype = {
       var stack = this.spots[i];
           stackEl = stack.element();
 
-      $(stackEl).bind('mousedown', { 
-        player: this, 
-        stack: stack, 
-        stackEl: stackEl 
-      }, this.clickStack);
-
       el.append(stackEl);
     }
     return el;
-  },
-  
-  clickStack: function(e) {
-    e.preventDefault();
-    var player = e.data.player;
-        stack = e.data.stack;
-        stackEl = e.data.stackEl[0];
-
-    console.log(player.hand, stack, stackEl);
   }
 };
-  

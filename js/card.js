@@ -24,10 +24,48 @@ Player
 
 */
 
-Card = function(s, v) {
+Game = function(){
+  this.player = new Player();
+  this.cards = [];
+  
+  $('.card').live('mouseover mouseout mousedown', function(e){
+    if (e.target.tagName != 'LI') {
+      e.target = e.target.parentNode;
+    }
+    switch (e.type) {
+      case 'mouseover':
+        $(this).addClass('hovered');
+        $('.hovered ~ li').addClass('hovered');
+        break;
+      case 'mouseout':
+        $('.hovered').removeClass('hovered');
+        break;
+      case 'mousedown':
+        console.log('click', e.target.card);
+        break;
+    }
+  });
+  
+}
+Game.ID = 0;
+Game.prototype = {
+  
+  makeCard: function(s, v){
+    var id = ++Game.ID;
+    return this.cards[id] = new Card(id, s, v);
+  },
+  addCard: function(c) {
+    return this.cards[c.id] = c;
+  }
+  
+}
+
+Card = function(id, s, v) {
   this.value = v;
   this.suit = s;
+  this.id = id;
 };
+
 Card.prototype = {
   element:function() {
     var sym = this.suitSym(this.suit),
@@ -42,6 +80,8 @@ Card.prototype = {
   
     el.addClass(this.suit);    
     el.append(v).append(s).append(b);
+    
+    el[0].card = this;
 
     return el;
   },
@@ -62,16 +102,17 @@ Card.prototype = {
   }
 };
 
+
 Deck = function() {
   this.cards = [];
 
   var vals = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'],
       suits = ['h', 'd', 'c', 's'],
-      v, s, c;
+      v, s;
       
   for (s = 0; s < suits.length; s++) {
     for (v = 0; v < vals.length; v++) {
-      this.cards.push(new Card(suits[s], vals[v], c));
+      this.cards.push(new Card(null,  suits[s], vals[v]));
     }
   }
 };
@@ -123,6 +164,10 @@ Stack.prototype = {
       el.append(cel);
     }
     return el;
+  },
+
+  get: function(i) {
+    return this.cards[i];
   },
 
   add: function(c) {
