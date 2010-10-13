@@ -131,7 +131,7 @@ Stack.prototype = {
 
   top: function() {
     return this.cards[this.cards.length-1];
-  }
+  },
 
   toString: function() {
     var str = '', i;

@@ -1,13 +1,13 @@
 Player = function() {
   var deck = new Deck();
-  this.deck.shuffle();
-  this.hand = this.deck.take(35);
-  this.pile = this.deck.take(13);
+  deck.shuffle();
+  this.hand = deck.take(35);
+  this.pile = deck.take(13);
   this.spots = [];
   for (var i = 0; i < 4; i++) {
-    this.spots.push(this.deck.take(1));
+    this.spots.push(deck.take(1));
   }
-}
+};
   
 Player.prototype = {
   element: function() {
@@ -27,7 +27,7 @@ Player.prototype = {
     return el;
   },
   
-  clickStack = function(e) {
+  clickStack: function(e) {
     e.preventDefault();
     var player = e.data.player;
         stack = e.data.stack;
