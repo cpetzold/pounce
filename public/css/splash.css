@@ -1,0 +1,24 @@
+#splash {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  padding: 10px 0;
+  background: #ccc;
+  border-top: 1px solid #b0b0b0;
+  border-bottom: 1px solid #b0b0b0;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.05) 4px 4px 0px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.05) 4px 4px 0px inset;
+}
+#splash div {
+  width: 600px;
+  margin: auto;
+}
+#splash:hover {
+  background: #bbb;
+}
+#splash:hover .back {
+  visibility: visible;
+}
+.card .back {
+  visibility: hidden;
+}
