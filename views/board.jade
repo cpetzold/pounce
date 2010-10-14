@@ -4,9 +4,33 @@ html
     title= title
     link(rel='stylesheet', href='/css/style.css')
 
-  body
+  body#board
   
-    #board
+    .player
+      ul.stack
+        li.card.full.c
+          span.value 5
+          span.symbol &clubs;
+          span.back
+
+      ul.stack
+        li.card.full.c
+          span.value 5
+          span.symbol &clubs;
+          span.back
+        
+      ul.stack
+        li.card.full.c
+          span.value 5
+          span.symbol &clubs;
+          span.back
+        
+      ul.stack
+        li.card.full.c
+          span.value 5
+          span.symbol &clubs;
+          span.back          
+
   
     script(src='/js/jquery.js')
     script(src='/js/card.js')

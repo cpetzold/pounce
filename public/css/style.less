@@ -20,7 +20,7 @@ ul, li {
   padding: 0;
 }
 
-#board {
+.player {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -50,10 +50,21 @@ ul, li {
   background: #ddd;
   -moz-border-radius: 5px 5px 0px 0px;
   border-radius: 5px 5px 0px 0px;
-}
-
-.ui-draggable-dragging {
   
+  .value {
+    font-size: 18px;
+    margin: 0 3px 0 6px;
+  }
+  .symbol {
+    font-size: 16px;
+  }
+  .back {
+    position: absolute;
+    right: 5px;
+    top: -10px;
+    font-size: 35px;
+    opacity: 0.2;
+  }
 }
 
 .card:last-child {
@@ -62,46 +73,34 @@ ul, li {
   -moz-border-radius: 5px;
   border-radius: 5px;
   background: #eee;
+  
+  .value {
+    position: absolute;
+    margin-left: 0;
+    font-size: 50px;
+    bottom: 0px;
+    left: 10px; 
+  }
+  
+  .symbol {
+    position: absolute;
+    font-size: 20px;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .back {
+    font-size: 90px;
+    left: -10px;
+    top: -20px;
+  }
 }
 
 .hovered {
   background: #eee;
 }
-.hovered.full {
+.hovered:last-child {
   background: #fff;
-}
-
-.value {
-  font-size: 18px;
-  margin: 0 3px 0 6px;
-}
-.symbol {
-  font-size: 16px;
-}
-.back {
-  position: absolute;
-  right: 5px;
-  top: -10px;
-  font-size: 35px;
-  opacity: 0.2;
-}
-.card:last-child .value {
-  position: absolute;
-  margin-left: 0;
-  font-size: 50px;
-  bottom: 0px;
-  left: 10px;
-}
-.card:last-child .symbol {
-  position: absolute;
-  font-size: 20px;
-  top: 10px;
-  right: 10px;
-}
-.card:last-child .back {
-  font-size: 90px;
-  left: -10px;
-  top: -20px;
 }
 
 .d, .h {

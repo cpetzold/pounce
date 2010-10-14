@@ -16,7 +16,7 @@ ul, li {
   margin: 0;
   padding: 0;
 }
-#board {
+.player {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -43,32 +43,26 @@ ul, li {
   -moz-border-radius: 5px 5px 0px 0px;
   border-radius: 5px 5px 0px 0px;
 }
+.card .value {
+  font-size: 18px;
+  margin: 0 3px 0 6px;
+}
+.card .symbol {
+  font-size: 16px;
+}
+.card .back {
+  position: absolute;
+  right: 5px;
+  top: -10px;
+  font-size: 35px;
+  opacity: 0.2;
+}
 .card:last-child {
   height: 75px;
   margin-bottom: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   background: #eee;
-}
-.hovered {
-  background: #eee;
-}
-.hovered.full {
-  background: #fff;
-}
-.value {
-  font-size: 18px;
-  margin: 0 3px 0 6px;
-}
-.symbol {
-  font-size: 16px;
-}
-.back {
-  position: absolute;
-  right: 5px;
-  top: -10px;
-  font-size: 35px;
-  opacity: 0.2;
 }
 .card:last-child .value {
   position: absolute;
@@ -87,6 +81,12 @@ ul, li {
   font-size: 90px;
   left: -10px;
   top: -20px;
+}
+.hovered {
+  background: #eee;
+}
+.hovered:last-child {
+  background: #fff;
 }
 .d, .h {
   color: #b14e4e;
