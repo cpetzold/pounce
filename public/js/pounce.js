@@ -4,7 +4,7 @@ Pounce = function() {
   var init = function() {
     
     var game = new Game();
-    $('#board').append(game.player.element());      
+    // $('#board').append(game.player.element());      
 
     $(document).disableTextSelection();
     

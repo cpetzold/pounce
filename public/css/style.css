@@ -11,26 +11,47 @@ body {
   background: #ddd;
   color: #666;
   font-family: LeagueGothic;
+  width: 100%;
 }
 ul, li {
   margin: 0;
   padding: 0;
 }
-.player {
+.card-shape {
+  width: 75px;
+  height: 75px;
+  margin-bottom: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+#bottom {
   position: absolute;
   bottom: 0;
+  left: 0;
   width: 100%;
+}
+#player {
+  position: relative;
+  width: 512px;
+  margin: auto;
   background: #ccc;
-  border-top: 1px solid #b0b0b0;
+  border: 1px solid #b0b0b0;
+  border-bottom: 0;
   -webkit-box-shadow: rgba(0, 0, 0, 0.05) 4px 4px 0px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.05) 4px 4px 0px inset;
+}
+#player .pounce, #player .piles, #player .stream {
+  display: inline-block;
+}
+#player .stream, #player .piles {
+  border-left: 1px solid #b0b0b0;
 }
 .stack {
   display: inline-block;
   vertical-align: top;
-  margin: 10px;
+  margin: 5px;
 }
-.card {
+.stack .card {
   position: relative;
   display: block;
   width: 75px;
@@ -43,49 +64,50 @@ ul, li {
   -moz-border-radius: 5px 5px 0px 0px;
   border-radius: 5px 5px 0px 0px;
 }
-.card .value {
+.stack .card .value {
   font-size: 18px;
   margin: 0 3px 0 6px;
 }
-.card .symbol {
+.stack .card .symbol {
   font-size: 16px;
 }
-.card .back {
+.stack .card .back {
   position: absolute;
   right: 5px;
   top: -10px;
   font-size: 35px;
   opacity: 0.2;
 }
-.card:last-child {
+.stack .card:last-child {
+  width: 75px;
   height: 75px;
   margin-bottom: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   background: #eee;
 }
-.card:last-child .value {
+.stack .card:last-child .value {
   position: absolute;
   margin-left: 0;
   font-size: 50px;
   bottom: 0px;
   left: 10px;
 }
-.card:last-child .symbol {
+.stack .card:last-child .symbol {
   position: absolute;
   font-size: 20px;
   top: 10px;
   right: 10px;
 }
-.card:last-child .back {
+.stack .card:last-child .back {
   font-size: 90px;
   left: -10px;
   top: -20px;
 }
-.hovered {
+.stack .hovered {
   background: #eee;
 }
-.hovered:last-child {
+.stack .hovered:last-child {
   background: #fff;
 }
 .d, .h {

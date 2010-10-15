@@ -6,32 +6,45 @@ html
 
   body#board
   
-    .player
-      ul.stack
-        li.card.full.c
-          span.value 5
-          span.symbol &clubs;
-          span.back
-
-      ul.stack
-        li.card.full.c
-          span.value 5
-          span.symbol &clubs;
-          span.back
-        
-      ul.stack
-        li.card.full.c
-          span.value 5
-          span.symbol &clubs;
-          span.back
-        
-      ul.stack
-        li.card.full.c
-          span.value 5
-          span.symbol &clubs;
-          span.back          
-
   
+    #bottom
+      #player
+        .pounce
+          ul.stack
+            li.card(style='background: url(../images/avtest.png)')
+
+        .piles
+          ul.stack
+            li.card.h
+              span.value 5
+              span.symbol &hearts;
+          ul.stack
+            li.card.c
+              span.value 3
+              span.symbol &clubs;
+          ul.stack
+            li.card.d
+              span.value A
+              span.symbol &diams;
+              span.back &diams;
+          ul.stack
+            li.card.s
+              span.value K
+              span.symbol &spades;
+              
+        .stream
+          ul.stack
+            li.card.h
+              span.value 9
+              span.symbol &hearts;
+            li.card.s
+              span.value K
+              span.symbol &spades;
+            li.card.h
+              span.value J
+              span.symbol &hearts;
+
+
     script(src='/js/jquery.js')
     script(src='/js/card.js')
     script(src='/js/player.js')
