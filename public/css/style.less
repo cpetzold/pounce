@@ -3,6 +3,11 @@
   src: url('../fonts/League Gothic.otf');
 }
 
+@font-face {
+  font-family: Pixel;
+  src: url('../fonts/Pixel.ttf');
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -92,6 +97,20 @@ ul, li {
       top: -10px;
       font-size: 35px;
       opacity: 0.2;
+    }
+    
+    .size {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 2px 0 2px 0;
+      
+      font: 8px Pixel;
+      text-align: right;
+      background: #ddd;
+      border-top: 1px solid #ccc;
+      
+      color: #333;
     }
   }
 
