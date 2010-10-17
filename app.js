@@ -1,6 +1,5 @@
 require.paths.unshift(__dirname + '/support/express/support/express/lib/',
 						          __dirname + '/support/jade/lib/',
-						          __dirname + '/support/express/express/support/sass/lib/',
 						          __dirname + '/');
 
 var express = require('./support/express');
@@ -24,20 +23,19 @@ app.configure('production', function(){
 });
 
 // Routes
+// app.get('/', function(req, res){
+//     res.render('splash.jade', {
+//       layout: false,
+//     });
+// });
 
 app.get('/', function(req, res){
-    res.render('splash.jade', {
-      layout: false,
-    });
-});
-
-app.get('/g', function(req, res){
     res.render('board.jade', {
       layout: false,
       locals: {
-        title: 'Pounce Game'
+        title: 'pounce'
       }
     });
 });
 
-if (!module.parent) app.listen(3000);
+if (!module.parent) app.listen(80);

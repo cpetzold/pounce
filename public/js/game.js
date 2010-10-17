@@ -46,6 +46,9 @@ Game.prototype = {
   },
   
   mouseUp: function(e) {
+    if (this.drag) {
+      this.drag.el.addClass('returning');
+    }
     this.drag = null;
   },
 
