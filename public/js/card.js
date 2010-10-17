@@ -1,34 +1,8 @@
-
-/*
-Card
-================
-  1. DOM Element
-  2. Suit / Color
-  3. Card (value)
-
-
-Deck
-================
-
-  1. Shuffle
-  2. Take
-  3
-
-
-Stack
-================
-
-Player
-================
-
-
-*/
-
 Game = function(){
   this.player = new Player();
   this.cards = [];
   
-  $('.card').live('mouseover mouseout mousedown', function(e){
+  $('#player .card').live('mouseover mouseout mousedown', function(e){
     if (e.target.tagName != 'LI') {
       e.target = e.target.parentNode;
     }
@@ -41,7 +15,7 @@ Game = function(){
         $('.hovered').removeClass('hovered');
         break;
       case 'mousedown':
-        console.log('click', e.target.card);
+        console.log('click', $(e.target).data('card').toString());
         break;
     }
   });
@@ -81,8 +55,9 @@ Card.prototype = {
     el.addClass(this.suit);    
     el.append(v).append(s).append(b);
     
-    el[0].card = this;
-
+    this.el = el;
+    this.el.data('card', this);
+    
     return el;
   },
  
@@ -158,9 +133,6 @@ Stack.prototype = {
     for (i = 0; i < this.cards.length; i++) {
       c = this.cards[i];
       cel = c.element();
-      if (i == this.cards.length-1) {
-        cel.addClass('full');
-      }
       el.append(cel);
     }
     return el;

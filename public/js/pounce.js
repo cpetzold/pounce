@@ -1,10 +1,8 @@
-Pounce = function() {
-  var activeStack;
-  
+Pounce = function() {  
   var init = function() {
     
     var game = new Game();
-    // $('#board').append(game.player.element());      
+    $('#bottom').append(game.player.element());      
 
     $(document).disableTextSelection();
     
