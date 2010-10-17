@@ -28,10 +28,8 @@ Player.prototype = {
     }
     
     var stream = $('<div class="stream"></div>');
-    for (var i = 0; i < 2; i++) {
-      var card = this.hand[i];
-      console.log(card);
-    }
+    var streamStack = new Stack([this.hand.top()]);
+    stream.append(streamStack.element());
     
     return el.append(pounce, piles, stream);
   }

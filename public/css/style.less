@@ -79,10 +79,15 @@ ul, li {
     border-left: 1px solid #b0b0b0;
   }
   
-  .pounce .stack .card {
-    -webkit-box-shadow: 0px 1px 0px #aaa, 0px 2px 0px #666, 0px 3px 0px #aaa, 0px 4px 0px #666, 0px 5px 0px #aaa, 0px 6px 0px #666, 0px 7px 0px #aaa, 0px 8px 0px #666, 0px 9px 0px #aaa, 0px 1px 0px #666;
+  .pounce .card {
+    margin-top: -10px;
+    -webkit-box-shadow: 0px 10px 0px #666;
   }
   
+  .stream .card {
+    margin-top: -3px;
+    -webkit-box-shadow: 0px 3px 0px #666;
+  }
   
   .stack {
     display: inline-block;
@@ -113,6 +118,7 @@ ul, li {
       }
       .back {
         position: absolute;
+        font-family: 
         right: 5px;
         top: -10px;
         font-size: 35px;
@@ -123,6 +129,7 @@ ul, li {
     .card:last-child {
       .card-shape;
       background: #eee;
+      overflow: hidden;
 
       .value {
         position: absolute;
@@ -148,15 +155,14 @@ ul, li {
       .size {
         position: absolute;
         bottom: 0;
-        right: 0;
+        right: 5px;
         padding: 2px;
         visibility: hidden;
 
-        font: 12px Pixel;
-        text-align: right;
-        background: #ddd;
-        border-top: 1px solid #ccc;
-        border-left: 1px solid #ccc;
+        font: 8px Pixel;
+        background: #eee;
+        border: 1px solid #ccc;
+        border-bottom: 0px;
 
         color: #333;
       }
@@ -290,8 +296,12 @@ ul, li {
 }
 
 
+/*.symbol, .back {
+  font-family: ‘Lucida Sans Unicode’;
+  font-weight: bold;
+}*/
 
-.d, .h {
+.d, .h { 
   color: #b14e4e;
 }
 .s, .c {

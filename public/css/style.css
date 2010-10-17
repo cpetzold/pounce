@@ -65,8 +65,13 @@ ul, li {
 #player .stream, #player .piles {
   border-left: 1px solid #b0b0b0;
 }
-#player .pounce .stack .card {
-  -webkit-box-shadow: 0px 1px 0px #aaa, 0px 2px 0px #666, 0px 3px 0px #aaa, 0px 4px 0px #666, 0px 5px 0px #aaa, 0px 6px 0px #666, 0px 7px 0px #aaa, 0px 8px 0px #666, 0px 9px 0px #aaa, 0px 1px 0px #666;
+#player .pounce .card {
+  margin-top: -10px;
+  -webkit-box-shadow: 0px 10px 0px #666;
+}
+#player .stream .card {
+  margin-top: -3px;
+  -webkit-box-shadow: 0px 3px 0px #666;
 }
 #player .stack {
   display: inline-block;
@@ -95,7 +100,7 @@ ul, li {
 }
 #player .stack .card .back {
   position: absolute;
-  right: 5px;
+  font-family: right: 5px;
   top: -10px;
   font-size: 35px;
   opacity: 0.2;
@@ -107,6 +112,7 @@ ul, li {
   -moz-border-radius: 5px;
   border-radius: 5px;
   background: #eee;
+  overflow: hidden;
 }
 #player .stack .card:last-child .value {
   position: absolute;
@@ -129,14 +135,13 @@ ul, li {
 #player .stack .card:last-child .size {
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: 5px;
   padding: 2px;
   visibility: hidden;
-  font: 12px Pixel;
-  text-align: right;
-  background: #ddd;
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
+  font: 8px Pixel;
+  background: #eee;
+  border: 1px solid #ccc;
+  border-bottom: 0px;
   color: #333;
 }
 #player .stack .hovered {
@@ -242,6 +247,10 @@ ul, li {
 .opponent .stack .hovered:last-child .size {
   visibility: visible;
 }
+/*.symbol, .back {
+  font-family: ‘Lucida Sans Unicode’;
+  font-weight: bold;
+}*/
 .d, .h {
   color: #b14e4e;
 }

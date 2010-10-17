@@ -2,7 +2,21 @@ Game = function(){
   this.player = new Player();
   this.cards = [];
   
-  $('#player .card').live('mouseover mouseout mousedown', function(e){
+  $('#player .card').live('mouseover mouseout mousedown', this.cardMouseEvent);
+  
+}
+Game.ID = 0;
+Game.prototype = {
+  
+  makeCard: function(s, v){
+    var id = ++Game.ID;
+    return this.cards[id] = new Card(id, s, v);
+  },
+  addCard: function(c) {
+    return this.cards[c.id] = c;
+  },
+  
+  cardMouseEvent: function(e) {
     if (e.target.tagName != 'LI') {
       e.target = e.target.parentNode;
     }
@@ -18,18 +32,6 @@ Game = function(){
         console.log('click', $(e.target).data('card').toString());
         break;
     }
-  });
-  
-}
-Game.ID = 0;
-Game.prototype = {
-  
-  makeCard: function(s, v){
-    var id = ++Game.ID;
-    return this.cards[id] = new Card(id, s, v);
-  },
-  addCard: function(c) {
-    return this.cards[c.id] = c;
   }
   
 }
@@ -51,6 +53,11 @@ Card.prototype = {
     if (this.value == 'A') {
       b.html(sym);
     }
+    
+    // var faceCards = { 'K': '\u265A', 'Q': '\u265B', 'J': '\u2368' };
+    // if (faceCards[this.value]) {
+    //   b.html(faceCards[this.value]);
+    // }
   
     el.addClass(this.suit);    
     el.append(v).append(s).append(b);
