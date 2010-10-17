@@ -28,7 +28,7 @@ Player.prototype = {
     }
     
     var stream = $('<div class="stream"></div>');
-    var streamStack = new Stack([this.hand.top()]);
+    var streamStack = new Stack(this.hand.top(3));
     stream.append(streamStack.element());
     
     return el.append(pounce, piles, stream);

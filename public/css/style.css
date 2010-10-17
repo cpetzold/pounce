@@ -69,10 +69,6 @@ ul, li {
   margin-top: -10px;
   -webkit-box-shadow: 0px 10px 0px #666;
 }
-#player .stream .card {
-  margin-top: -3px;
-  -webkit-box-shadow: 0px 3px 0px #666;
-}
 #player .stack {
   display: inline-block;
   vertical-align: top;
@@ -104,6 +100,9 @@ ul, li {
   top: -10px;
   font-size: 35px;
   opacity: 0.2;
+}
+#player .stack .card:first-child {
+  border-top: 0;
 }
 #player .stack .card:last-child {
   width: 75px;

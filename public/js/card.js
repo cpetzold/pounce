@@ -1,41 +1,3 @@
-Game = function(){
-  this.player = new Player();
-  this.cards = [];
-  
-  $('#player .card').live('mouseover mouseout mousedown', this.cardMouseEvent);
-  
-}
-Game.ID = 0;
-Game.prototype = {
-  
-  makeCard: function(s, v){
-    var id = ++Game.ID;
-    return this.cards[id] = new Card(id, s, v);
-  },
-  addCard: function(c) {
-    return this.cards[c.id] = c;
-  },
-  
-  cardMouseEvent: function(e) {
-    if (e.target.tagName != 'LI') {
-      e.target = e.target.parentNode;
-    }
-    switch (e.type) {
-      case 'mouseover':
-        $(this).addClass('hovered');
-        $('.hovered ~ li').addClass('hovered');
-        break;
-      case 'mouseout':
-        $('.hovered').removeClass('hovered');
-        break;
-      case 'mousedown':
-        console.log('click', $(e.target).data('card').toString());
-        break;
-    }
-  }
-  
-}
-
 Card = function(id, s, v) {
   this.value = v;
   this.suit = s;
@@ -54,10 +16,6 @@ Card.prototype = {
       b.html(sym);
     }
     
-    // var faceCards = { 'K': '\u265A', 'Q': '\u265B', 'J': '\u2368' };
-    // if (faceCards[this.value]) {
-    //   b.html(faceCards[this.value]);
-    // }
   
     el.addClass(this.suit);    
     el.append(v).append(s).append(b);
@@ -81,87 +39,5 @@ Card.prototype = {
       case 's': sym = '\u2660'; break;
     }
     return sym;
-  }
-};
-
-
-Deck = function() {
-  this.cards = [];
-
-  var vals = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'],
-      suits = ['h', 'd', 'c', 's'],
-      v, s;
-      
-  for (s = 0; s < suits.length; s++) {
-    for (v = 0; v < vals.length; v++) {
-      this.cards.push(new Card(null,  suits[s], vals[v]));
-    }
-  }
-};
-Deck.prototype = {
-  shuffle: function() {
-    var i, j, o;
-    for (i = this.cards.length - 1; i > 0; i--) {
-      j = parseInt(Math.random() * i);
-      o = this.cards[i];
-      this.cards[i] = this.cards[j];
-      this.cards[j] = o;
-    }
-  },
-  
-  take: function(n) {
-    n = n || 1;
-  
-    var st = new Stack();
-    while (n--) {
-      st.add(this.cards.shift());
-    }
-  
-    return st;
-  },
-
-  toString: function() {
-    var str = '', i;
-    for (i = 0; i < this.cards.length; i++) {
-      str += this.cards[i] + ' ';
-    }
-    return str;
-  }
-};
-
-Stack = function(c) {
-  this.cards = c || [];
-};
-Stack.prototype = {
-  element: function() {
-    var el = $('<ul class="stack"></ul>');
-  
-    var i, c, cel;
-    for (i = 0; i < this.cards.length; i++) {
-      c = this.cards[i];
-      cel = c.element();
-      el.append(cel);
-    }
-    return el;
-  },
-
-  get: function(i) {
-    return this.cards[i];
-  },
-
-  add: function(c) {
-    this.cards.push(c);
-  },
-
-  top: function() {
-    return this.cards[this.cards.length-1];
-  },
-
-  toString: function() {
-    var str = '', i;
-    for (i = 0; i < this.cards.length; i++) {
-      str += this.cards[i] + ' ';
-    }
-    return str;
   }
 };
