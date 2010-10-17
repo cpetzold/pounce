@@ -8,13 +8,16 @@
   src: url('../fonts/Pixel.ttf');
 }
 
-.animate(@p: '', @d: '5s') {
+.animate(@p: '', @d: '5s', @tf: 'ease') {
   -moz-transition-property: @p;
   -webkit-transition-property: @p;
   -o-transition-property: @p;
   -moz-transition-duration: @d;
   -webkit-transition-duration: @d;
   -o-transition-duration: @d;
+  -moz-transition-timing-function: @tf;
+  -webkit-transition-timing-function: @tf;
+  -o-transition-timing-function: @tf;
 }
 
 html, body {
@@ -184,14 +187,12 @@ ul, li {
         visibility: visible;
       }
     }
-    
-    .returning {
-      position: absolute;
-      left: 10px;
-      top: 10px;
-      .animate('left, top', '5s');
-    }
   }
+  
+  .returning {
+    .animate('top, left', 0.6s);
+  }
+  
 }
 
 .opponent {
@@ -224,7 +225,7 @@ ul, li {
       position: relative;
       display: block;
       width: 32px;
-      height: 13px;
+      height: 11px;
       overflow: hidden;
 
       border-top: 1px solid #ccc;
@@ -233,11 +234,12 @@ ul, li {
       border-radius: 4px 4px 0px 0px;
 
       .value {
-        font-size: 12px;
+        font-family: Pixel;
+        font-size: 8px;
         margin: 2px;
       }
       .symbol {
-        font-size: 10px;
+        font-size: 8px;
       }
       .back {
         position: absolute;
@@ -257,6 +259,7 @@ ul, li {
       background: #eee;
 
       .value {
+        font-family: LeagueGothic;
         position: absolute;
         margin-left: 0;
         font-size: 18px;

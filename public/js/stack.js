@@ -11,6 +11,10 @@ Stack.prototype = {
       cel = c.element();
       el.append(cel);
     }
+    
+    this.el = el;
+    this.el.data('stack', this);
+    
     return el;
   },
 

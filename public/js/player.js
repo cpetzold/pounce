@@ -10,7 +10,7 @@ Player = function() {
     this.spots.push(deck.take(1));
   }
   
-  this.el = this.element();
+  this.element();
 };
   
 Player.prototype = {
@@ -30,6 +30,9 @@ Player.prototype = {
     var stream = $('<div class="stream"></div>');
     var streamStack = new Stack(this.hand.top(3));
     stream.append(streamStack.element());
+    
+    this.el = el;
+    this.el.data('card', this);
     
     return el.append(pounce, piles, stream);
   }

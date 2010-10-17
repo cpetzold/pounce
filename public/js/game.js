@@ -22,8 +22,8 @@ Game.prototype = {
   
   mouseOver: function(e) {
     var target = this.getCardEl(e.target);
-    $(target).addClass('hovered');
-    $('.hovered ~ li').addClass('hovered');
+    $(target).addClass('hovered').nextAll().addClass('hovered');
+    // $('.hovered ~ li').addClass('hovered');
   },
   
   mouseOut: function(e) {
@@ -31,23 +31,26 @@ Game.prototype = {
   },
   
   mouseDown: function(e) {
-    console.log(e);
+    
     var cardEl = $(this.getCardEl(e.target));
     var card = cardEl.data('card');
-    
     var cardOffset = cardEl.offset();
+    var stackEl = cardEl.parent();
+    var stack = stackEl.data('stack');
+    
+    // var newStack = 
+    
     this.drag = {
-      el: cardEl,
+      el: stackEl,
       dx: e.pageX - cardOffset.left,
       dy: e.pageY - cardOffset.top
     };
-    
-    // console.log(this.drag, card.toString());
   },
   
   mouseUp: function(e) {
     if (this.drag) {
       this.drag.el.addClass('returning');
+      this.drag.el.offset({left: 10, top: 10});
     }
     this.drag = null;
   },
@@ -84,7 +87,7 @@ jQuery.fn.disableTextSelection = function() {
 (function($){
   
   var game = new Game();
-  $('#bottom').append(game.player.element());      
+  $('#bottom').append(game.player.el);      
 
   $(document).disableTextSelection();
   
