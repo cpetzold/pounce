@@ -6,7 +6,7 @@ Game = function(){
   $('#player .card').live('mouseover', $.proxy(this.mouseOver, this));
   $('#player .card').live('mouseout', $.proxy(this.mouseOut, this));
   $('#player .card').live('mousedown', $.proxy(this.mouseDown, this));
-  $('#player .card').live('mouseup', $.proxy(this.mouseUp, this));
+  $('#drag .card').live('mouseup', $.proxy(this.mouseUp, this));
   $(document).mousemove($.proxy(this.mouseMove, this));
   
 }
@@ -23,11 +23,11 @@ Game.prototype = {
   mouseOver: function(e) {
     var target = this.getCardEl(e.target);
     $(target).addClass('hovered').nextAll().addClass('hovered');
-    // $('.hovered ~ li').addClass('hovered');
   },
   
   mouseOut: function(e) {
-    $('.hovered').removeClass('hovered');
+    var target = this.getCardEl(e.target);
+    $(target).removeClass('hovered');
   },
   
   mouseDown: function(e) {
@@ -38,21 +38,34 @@ Game.prototype = {
     var stackEl = cardEl.parent();
     var stack = stackEl.data('stack');
     
-    // var newStack = 
+    var n = cardEl.nextAll().size()+1;    
+    var newStack = stack.take(n);
+    newStack.element(); // generates newStack.el
+    stack.update();
+    
+    newStack.el.children().addClass('hovered')
+    
+    $('#drag').append(newStack.el);
+    newStack.el.offset(cardOffset);
     
     this.drag = {
-      el: stackEl,
-      dx: e.pageX - cardOffset.left,
-      dy: e.pageY - cardOffset.top
+      el: newStack.el,
+      offset: {
+        left: e.pageX - cardOffset.left,
+        top: e.pageY - cardOffset.top
+      },
+      originalLocation: cardOffset
     };
   },
   
   mouseUp: function(e) {
     if (this.drag) {
+      this.drag.el.removeAttr('style');
       this.drag.el.addClass('returning');
-      this.drag.el.offset({left: 10, top: 10});
+      console.log(this.drag.originalLocation);
+      this.drag.el.offset(this.drag.originalLocation);
+      this.drag = null;
     }
-    this.drag = null;
   },
 
   mouseMove: function(e) {
@@ -60,8 +73,8 @@ Game.prototype = {
     if (this.drag) {
       // console.log('dragging', this.drag);
       this.drag.el.offset({
-        top: e.pageY - this.drag.dy,
-        left: e.pageX - this.drag.dx
+        left: e.pageX - this.drag.offset.left,
+        top: e.pageY - this.drag.offset.top
       });
     }
   }

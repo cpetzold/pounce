@@ -3,6 +3,8 @@ Stack = function(c) {
 };
 Stack.prototype = {
   element: function() {
+    if (this.el) return this.el;
+    
     var el = $('<ul class="stack"></ul>');
   
     var i, c, cel;
@@ -17,7 +19,20 @@ Stack.prototype = {
     
     return el;
   },
-
+  
+  update: function() {
+    var self = this;
+    if (!self.cards.length) {
+      self.el.empty();
+    } else {
+      console.log(self.cards);
+      self.el.children().each(function(k, v){
+        if (!self.cards[k]) $(v).detach();
+      });
+      
+    }
+  },
+  
   get: function(i) {
     return this.cards[i];
   },
@@ -34,6 +49,12 @@ Stack.prototype = {
       }
       return result;
     } else return this.cards[this.cards.length-1];
+  },
+
+  take: function(n) {
+    n = n || 1;
+    var cards = this.cards.splice(this.cards.length - n, n);
+    return new Stack(cards);
   },
 
   toString: function() {
@@ -72,13 +93,8 @@ Deck.prototype = {
   
   take: function(n) {
     n = n || 1;
-  
-    var st = new Stack();
-    while (n--) {
-      st.add(this.cards.shift());
-    }
-  
-    return st;
+    var cards = this.cards.splice(this.cards.length - n, n);
+    return new Stack(cards);
   },
 
   toString: function() {

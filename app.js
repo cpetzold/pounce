@@ -1,6 +1,6 @@
 require.paths.unshift(__dirname + '/support/express/support/express/lib/',
-						          __dirname + '/support/jade/lib/',
-						          __dirname + '/');
+                      __dirname + '/support/jade/lib/',
+                      __dirname + '/');
 
 var express = require('./support/express');
 
@@ -21,13 +21,6 @@ app.configure('development', function(){
 app.configure('production', function(){
    app.use(express.errorHandler()); 
 });
-
-// Routes
-// app.get('/', function(req, res){
-//     res.render('splash.jade', {
-//       layout: false,
-//     });
-// });
 
 app.get('/', function(req, res){
     res.render('board.jade', {

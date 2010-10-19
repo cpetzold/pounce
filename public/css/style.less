@@ -52,6 +52,13 @@ ul, li {
   .round(5px);
 }
 
+#drag {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 100;
+}
+
 #top {
   position: absolute;
   top: 0;
@@ -86,117 +93,116 @@ ul, li {
   border-bottom: 0;
   -webkit-box-shadow: rgba(0,0,0,0.05) 4px 4px 0px inset;
   -moz-box-shadow: rgba(0,0,0,0.05) 4px 4px 0px inset;
-  
-  .pounce, .piles, .stream {
-    display: inline-block;
-  }
-  
-  .stream, .piles {
-    border-left: 1px solid #b0b0b0;
-  }
-  
-  .pounce .card {
-    margin-top: -10px;
-    -webkit-box-shadow: 0px 10px 0px #666;
-  }
-  
-  .stack {
-    display: inline-block;
-    vertical-align: top;
-    margin: 5px;
+}
 
-    .card {
-      position: relative;
-      display: block;
-      width: 75px;
-      height: 30px;
-      cursor: move;
-      margin-bottom: -5px;
-      overflow: hidden;
+.pounce, .piles, .stream {
+  display: inline-block;
+}
 
-      border-top: 1px solid #ccc;
-      background: #ddd;
-      .round(5px 5px 0px 0px);
+.stream, .piles {
+  border-left: 1px solid #b0b0b0;
+}
 
-      .value {
-        font-size: 18px;
-        margin: 0 3px 0 6px;
-      }
-      .symbol {
-        font-size: 16px;
-      }
-      .back {
-        position: absolute;
-        font-family: 
-        right: 5px;
-        top: -10px;
-        font-size: 35px;
-        opacity: 0.2;
-      }
+.pounce .card {
+  margin-top: -10px;
+  -webkit-box-shadow: 0px 10px 0px #666;
+}
+
+.stack {
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px;
+
+  .card {
+    position: relative;
+    display: block;
+    width: 75px;
+    height: 30px;
+    cursor: move;
+    margin-bottom: -5px;
+    overflow: hidden;
+
+    border-top: 1px solid #ccc;
+    background: #ddd;
+    .round(5px 5px 0px 0px);
+
+    .value {
+      font-size: 18px;
+      margin: 0 3px 0 6px;
     }
-    
-    .card:first-child {
-      border-top: 0;
+    .symbol {
+      font-size: 16px;
+    }
+    .back {
+      position: absolute;
+      font-family: 
+      right: 5px;
+      top: -10px;
+      font-size: 35px;
+      opacity: 0.2;
+    }
+  }
+  
+  .card:first-child {
+    border-top: 0;
+  }
+
+  .card:last-child {
+    .card-shape;
+    background: #eee;
+    overflow: hidden;
+
+    .value {
+      position: absolute;
+      margin-left: 0;
+      font-size: 50px;
+      bottom: 0px;
+      left: 10px; 
     }
 
-    .card:last-child {
-      .card-shape;
+    .symbol {
+      position: absolute;
+      font-size: 20px;
+      top: 10px;
+      right: 10px;
+    }
+
+    .back {
+      font-size: 90px;
+      left: -10px;
+      top: -20px;
+    }
+
+    .size {
+      position: absolute;
+      bottom: 0;
+      right: 5px;
+      padding: 2px;
+      visibility: hidden;
+
+      font: 8px Pixel;
       background: #eee;
-      overflow: hidden;
+      border: 1px solid #ccc;
+      border-bottom: 0px;
 
-      .value {
-        position: absolute;
-        margin-left: 0;
-        font-size: 50px;
-        bottom: 0px;
-        left: 10px; 
-      }
-
-      .symbol {
-        position: absolute;
-        font-size: 20px;
-        top: 10px;
-        right: 10px;
-      }
-
-      .back {
-        font-size: 90px;
-        left: -10px;
-        top: -20px;
-      }
-
-      .size {
-        position: absolute;
-        bottom: 0;
-        right: 5px;
-        padding: 2px;
-        visibility: hidden;
-
-        font: 8px Pixel;
-        background: #eee;
-        border: 1px solid #ccc;
-        border-bottom: 0px;
-
-        color: #333;
-      }
-    }
-
-    .hovered {
-      background: #eee;
-    }
-    .hovered:last-child {
-      background: #fff;
-
-      .size {
-        visibility: visible;
-      }
+      color: #333;
     }
   }
-  
-  .returning {
-    .animate('top, left', 0.6s);
+
+  .hovered {
+    background: #eee;
   }
-  
+  .hovered:last-child {
+    background: #fff;
+
+    .size {
+      visibility: visible;
+    }
+  }
+}
+
+.returning {
+  .animate('top, left', 0.6s);
 }
 
 .opponent {

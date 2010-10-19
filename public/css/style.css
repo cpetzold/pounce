@@ -29,6 +29,12 @@ ul, li {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
+#drag {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 100;
+}
 #top {
   position: absolute;
   top: 0;
@@ -60,22 +66,22 @@ ul, li {
   -webkit-box-shadow: rgba(0, 0, 0, 0.05) 4px 4px 0px inset;
   -moz-box-shadow: rgba(0, 0, 0, 0.05) 4px 4px 0px inset;
 }
-#player .pounce, #player .piles, #player .stream {
+.pounce, .piles, .stream {
   display: inline-block;
 }
-#player .stream, #player .piles {
+.stream, .piles {
   border-left: 1px solid #b0b0b0;
 }
-#player .pounce .card {
+.pounce .card {
   margin-top: -10px;
   -webkit-box-shadow: 0px 10px 0px #666;
 }
-#player .stack {
+.stack {
   display: inline-block;
   vertical-align: top;
   margin: 5px;
 }
-#player .stack .card {
+.stack .card {
   position: relative;
   display: block;
   width: 75px;
@@ -89,24 +95,24 @@ ul, li {
   -moz-border-radius: 5px 5px 0px 0px;
   -webkit-border-radius: 5px 5px 0px 0px;
 }
-#player .stack .card .value {
+.stack .card .value {
   font-size: 18px;
   margin: 0 3px 0 6px;
 }
-#player .stack .card .symbol {
+.stack .card .symbol {
   font-size: 16px;
 }
-#player .stack .card .back {
+.stack .card .back {
   position: absolute;
   font-family: right: 5px;
   top: -10px;
   font-size: 35px;
   opacity: 0.2;
 }
-#player .stack .card:first-child {
+.stack .card:first-child {
   border-top: 0;
 }
-#player .stack .card:last-child {
+.stack .card:last-child {
   width: 75px;
   height: 75px;
   margin-bottom: 5px;
@@ -116,25 +122,25 @@ ul, li {
   background: #eee;
   overflow: hidden;
 }
-#player .stack .card:last-child .value {
+.stack .card:last-child .value {
   position: absolute;
   margin-left: 0;
   font-size: 50px;
   bottom: 0px;
   left: 10px;
 }
-#player .stack .card:last-child .symbol {
+.stack .card:last-child .symbol {
   position: absolute;
   font-size: 20px;
   top: 10px;
   right: 10px;
 }
-#player .stack .card:last-child .back {
+.stack .card:last-child .back {
   font-size: 90px;
   left: -10px;
   top: -20px;
 }
-#player .stack .card:last-child .size {
+.stack .card:last-child .size {
   position: absolute;
   bottom: 0;
   right: 5px;
@@ -146,16 +152,16 @@ ul, li {
   border-bottom: 0px;
   color: #333;
 }
-#player .stack .hovered {
+.stack .hovered {
   background: #eee;
 }
-#player .stack .hovered:last-child {
+.stack .hovered:last-child {
   background: #fff;
 }
-#player .stack .hovered:last-child .size {
+.stack .hovered:last-child .size {
   visibility: visible;
 }
-#player .returning {
+.returning {
   -moz-transition-property: 'top, left';
   -webkit-transition-property: 'top, left';
   -o-transition-property: 'top, left';
