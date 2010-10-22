@@ -51,11 +51,11 @@ Game.prototype = {
     this.drag = {
       st: {
         old: stack,
-        new: newStack
+        cur: newStack
       },
       el: {
         old: stackEl,
-        new: newStack.el
+        cur: newStack.el
       },
       offset: {
         left: e.pageX - cardOffset.left,
@@ -68,11 +68,11 @@ Game.prototype = {
   mouseUp: function(e) {
     if (this.drag) {
       var stack = this.drag.st.old;
-      stack.merge(this.drag.st.new);
+      stack.merge(this.drag.st.cur);
       stack.update();
       
-      this.drag.el.new.removeAttr('style');
-      this.drag.el.new.offset(this.drag.originalLocation);
+      this.drag.el.cur.removeAttr('style');
+      this.drag.el.cur.offset(this.drag.originalLocation);
       this.drag = null;
       $('#drag').empty();
       $('.hovered').removeClass('hovered');
@@ -83,7 +83,7 @@ Game.prototype = {
     // console.log(this.drag);
     if (this.drag) {
       // console.log('dragging', this.drag);
-      this.drag.el.new.offset({
+      this.drag.el.cur.offset({
         left: e.pageX - this.drag.offset.left,
         top: e.pageY - this.drag.offset.top
       });
