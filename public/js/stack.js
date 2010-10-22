@@ -1,5 +1,6 @@
 Stack = function(c) {
   this.cards = c || [];
+  this.emptyEl = $('<li class="card empty"></li>');
 };
 Stack.prototype = {
   element: function() {
@@ -22,15 +23,22 @@ Stack.prototype = {
   
   update: function() {
     var self = this;
-    if (!self.cards.length) {
-      self.el.empty();
+    
+    var els = self.el.children();
+    els.each(function(k, v){
+      if (!self.cards[k] || $(v).hasClass('empty')) $(v).detach();
+    });
+    
+    els = self.el.children();
+    
+    if (self.cards.length < 1) {
+      self.el.append(self.emptyEl);
     } else {
-      console.log(self.cards);
-      self.el.children().each(function(k, v){
-        if (!self.cards[k]) $(v).detach();
+      $.each(self.cards, function(k, v){
+        if (!els[k]) self.el.append(v.el);
       });
-      
     }
+    
   },
   
   get: function(i) {
@@ -39,6 +47,10 @@ Stack.prototype = {
 
   add: function(c) {
     this.cards.push(c);
+  },
+  
+  merge: function(s) {
+    this.cards = this.cards.concat(s.cards);
   },
 
   top: function(n) {
@@ -57,6 +69,15 @@ Stack.prototype = {
     return new Stack(cards);
   },
 
+  canDrop: function(s) {
+    var i = $.inArray(this.top().value, Deck.values);
+    if (!i) return false; // if -1 or 0 (not found or value is 2)
+    
+    var expectedValue = Deck.values[i-1];
+    var expectedSuits = (this.top().suit == 'h' || this.top().suit == 'd') ? ['c', 's'] : ['h', 'd'];
+    return (s.cards[0].value == expectedValue && $.inArray(s.cards[0].suit, expectedSuits) != -1);
+  },
+
   toString: function() {
     var str = '', i;
     for (i = 0; i < this.cards.length; i++) {
@@ -68,18 +89,15 @@ Stack.prototype = {
 
 
 Deck = function() {
-  this.cards = [];
-
-  var vals = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'],
-      suits = ['h', 'd', 'c', 's'],
-      v, s;
-      
-  for (s = 0; s < suits.length; s++) {
-    for (v = 0; v < vals.length; v++) {
-      this.cards.push(new Card(null,  suits[s], vals[v]));
+  this.cards = [];  
+  for (var s = 0; s < Deck.suits.length; s++) {
+    for (var v = 0; v < Deck.values.length; v++) {
+      this.cards.push(new Card(null,  Deck.suits[s], Deck.values[v]));
     }
   }
 };
+Deck.values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
+Deck.suits = ['h', 'd', 'c', 's'];
 Deck.prototype = {
   shuffle: function() {
     var i, j, o;

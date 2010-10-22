@@ -3,8 +3,8 @@ Game = function(){
   this.cards = [];
   this.drag = null;
   
-  $('#player .card').live('mouseover', $.proxy(this.mouseOver, this));
-  $('#player .card').live('mouseout', $.proxy(this.mouseOut, this));
+  $('#player .card').live('mouseenter', $.proxy(this.mouseOver, this));
+  $('#player .card').live('mouseleave', $.proxy(this.mouseOut, this));
   $('#player .card').live('mousedown', $.proxy(this.mouseDown, this));
   $('#drag .card').live('mouseup', $.proxy(this.mouseUp, this));
   $(document).mousemove($.proxy(this.mouseMove, this));
@@ -27,7 +27,7 @@ Game.prototype = {
   
   mouseOut: function(e) {
     var target = this.getCardEl(e.target);
-    $(target).removeClass('hovered');
+    $(target).removeClass('hovered').nextAll().removeClass('hovered');
   },
   
   mouseDown: function(e) {
@@ -49,7 +49,14 @@ Game.prototype = {
     newStack.el.offset(cardOffset);
     
     this.drag = {
-      el: newStack.el,
+      st: {
+        old: stack,
+        new: newStack
+      },
+      el: {
+        old: stackEl,
+        new: newStack.el
+      },
       offset: {
         left: e.pageX - cardOffset.left,
         top: e.pageY - cardOffset.top
@@ -60,11 +67,15 @@ Game.prototype = {
   
   mouseUp: function(e) {
     if (this.drag) {
-      this.drag.el.removeAttr('style');
-      this.drag.el.addClass('returning');
-      console.log(this.drag.originalLocation);
-      this.drag.el.offset(this.drag.originalLocation);
+      var stack = this.drag.st.old;
+      stack.merge(this.drag.st.new);
+      stack.update();
+      
+      this.drag.el.new.removeAttr('style');
+      this.drag.el.new.offset(this.drag.originalLocation);
       this.drag = null;
+      $('#drag').empty();
+      $('.hovered').removeClass('hovered');
     }
   },
 
@@ -72,7 +83,7 @@ Game.prototype = {
     // console.log(this.drag);
     if (this.drag) {
       // console.log('dragging', this.drag);
-      this.drag.el.offset({
+      this.drag.el.new.offset({
         left: e.pageX - this.drag.offset.left,
         top: e.pageY - this.drag.offset.top
       });
@@ -100,7 +111,7 @@ jQuery.fn.disableTextSelection = function() {
 (function($){
   
   var game = new Game();
-  $('#bottom').append(game.player.el);      
+  $('#top').append(game.player.el);      
 
   $(document).disableTextSelection();
   
