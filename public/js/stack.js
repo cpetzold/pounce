@@ -77,6 +77,12 @@ Stack.prototype = {
     var expectedSuits = (this.top().suit == 'h' || this.top().suit == 'd') ? ['c', 's'] : ['h', 'd'];
     return (s.cards[0].value == expectedValue && $.inArray(s.cards[0].suit, expectedSuits) != -1);
   },
+  
+  over: function(x, y) {
+    console.log(x, y, this.el);
+    // var o = this.el.offset(), w = this.el.
+    // return ()
+  },
 
   toString: function() {
     var str = '', i;

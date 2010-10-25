@@ -1,14 +1,12 @@
 Game = function(){
   this.player = new Player();
   this.cards = [];
-  this.drag = null;
+  this.drag = $('#drag');
   
   $('#player .card').live('mouseenter', $.proxy(this.mouseOver, this));
   $('#player .card').live('mouseleave', $.proxy(this.mouseOut, this));
-  $('#player .card').live('mousedown', $.proxy(this.mouseDown, this));
-  $('#drag .card').live('mouseup', $.proxy(this.mouseUp, this));
-  $(document).mousemove($.proxy(this.mouseMove, this));
-  
+  //   $('#player .card').live('mousedown', $.proxy(this.mouseDown, this));
+  //   $('#drag .card').live('mouseup', $.proxy(this.mouseUp, this));  
 }
 Game.ID = 0;
 Game.prototype = {
@@ -21,8 +19,20 @@ Game.prototype = {
   },
   
   mouseOver: function(e) {
-    var target = this.getCardEl(e.target);
-    $(target).addClass('hovered').nextAll().addClass('hovered');
+    var self = this;
+    var target = $(this.getCardEl(e.target));
+    target.addClass('hovered').nextAll().addClass('hovered');
+    if (!target.hasClass('ui-draggable')) {
+      target.draggable({
+        helper: $.proxy(self.dragStack, self),
+        appendTo: '#drag',
+        containment: 'document',
+        
+        start: $.proxy(self.dragStart, self),
+        stop: $.proxy(self.dragStop, self)
+      });
+
+    }
   },
   
   mouseOut: function(e) {
@@ -30,64 +40,39 @@ Game.prototype = {
     $(target).removeClass('hovered').nextAll().removeClass('hovered');
   },
   
-  mouseDown: function(e) {
-    
+  dragStack: function(e) {
     var cardEl = $(this.getCardEl(e.target));
     var card = cardEl.data('card');
     var cardOffset = cardEl.offset();
     var stackEl = cardEl.parent();
     var stack = stackEl.data('stack');
-    
+
     var n = cardEl.nextAll().size()+1;    
     var newStack = stack.take(n);
-    newStack.element(); // generates newStack.el
+    newStack.element();
     stack.update();
-    
-    newStack.el.children().addClass('hovered')
-    
-    $('#drag').append(newStack.el);
-    newStack.el.offset(cardOffset);
-    
-    this.drag = {
-      st: {
-        old: stack,
-        cur: newStack
-      },
-      el: {
-        old: stackEl,
-        cur: newStack.el
-      },
-      offset: {
-        left: e.pageX - cardOffset.left,
-        top: e.pageY - cardOffset.top
-      },
-      originalLocation: cardOffset
-    };
+
+    newStack.el.children().addClass('hovered');
+    return newStack.el;
   },
   
-  mouseUp: function(e) {
-    if (this.drag) {
-      var stack = this.drag.st.old;
-      stack.merge(this.drag.st.cur);
-      stack.update();
-      
-      this.drag.el.cur.removeAttr('style');
-      this.drag.el.cur.offset(this.drag.originalLocation);
-      this.drag = null;
-      $('#drag').empty();
-      $('.hovered').removeClass('hovered');
-    }
+  dragStart: function(e, ui) {
+    console.log(e, ui);
   },
-
-  mouseMove: function(e) {
-    // console.log(this.drag);
-    if (this.drag) {
-      // console.log('dragging', this.drag);
-      this.drag.el.cur.offset({
-        left: e.pageX - this.drag.offset.left,
-        top: e.pageY - this.drag.offset.top
-      });
-    }
+  
+  dragStop: function(e, ui) {
+    console.log(e, ui);
+    // if (this.drag) {
+    //   var stack = this.drag.st.old;
+    //   stack.merge(this.drag.st.cur);
+    //   stack.update();
+    //   
+    //   this.drag.el.cur.removeAttr('style');
+    //   this.drag.el.cur.offset(this.drag.originalLocation);
+    //   this.drag = null;
+    //   $('#drag').empty();
+    //   $('.hovered').removeClass('hovered');
+    // }
   }
   
 };
