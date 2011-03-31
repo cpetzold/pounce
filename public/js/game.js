@@ -24,8 +24,9 @@ Game.prototype = {
     target.addClass('hovered').nextAll().addClass('hovered');
     if (!target.hasClass('ui-draggable')) {
       target.draggable({
-        helper: $.proxy(self.dragStack, self),
-        appendTo: '#drag',
+        helper: 'clone',
+        // helper: $.proxy(self.dragStack, self),
+        // appendTo: '#drag',
         containment: 'document',
         
         start: $.proxy(self.dragStart, self),
@@ -46,13 +47,15 @@ Game.prototype = {
     var cardOffset = cardEl.offset();
     var stackEl = cardEl.parent();
     var stack = stackEl.data('stack');
-
+    
     var n = cardEl.nextAll().size()+1;    
     var newStack = stack.take(n);
     newStack.element();
     stack.update();
 
     newStack.el.children().addClass('hovered');
+    newStack.el.offset({x: 100, y: 100});
+    console.log(newStack.el.offset());
     return newStack.el;
   },
   

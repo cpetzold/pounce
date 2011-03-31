@@ -30,9 +30,9 @@ ul, li {
 }
 #drag {
   position: absolute;
-  width: 0;
-  height: 0;
-  z-index: 100;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 #drag .stack {
   -webkit-box-shadow: #aaa 0px 0px 6px;
